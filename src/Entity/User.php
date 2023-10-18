@@ -22,15 +22,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?string $role = 'user';
+     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $surname;
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSurname(): ?string
+    {
+        return $this->surname;
+    }
+
+    public function setSurname(string $surname): self
+    {
+        $this->surname = $surname;
+
+        return $this;
+    }
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
+
 
     public function getId(): ?int
     {
@@ -55,7 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setRole(string $role): static
     {
-        $this->role[] = $role;
+        $this->role = $role;
 
         return $this;
     }

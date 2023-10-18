@@ -7,6 +7,7 @@ use App\Form\RegistrationFormType;
 // use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 // use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Form\FormView;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,10 +32,10 @@ class RegistrationController extends AbstractController
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
+{
+         $user = new User();
+        $user->setRole('user');
    
-        $form = setRole('user');
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
